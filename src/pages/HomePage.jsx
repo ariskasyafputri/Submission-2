@@ -3,6 +3,123 @@ import { useDispatch, useSelector } from 'react-redux';
 import ThreadItem from '../components/ThreadItem';
 import { asyncFetchThreads, setFilter, asyncCreateThread } from '../states/threadsSlice';
 
+// --- STYLING OBJECTS ---
+
+const selectStyle = {
+  padding: '8px 12px',
+  borderRadius: '8px',
+  border: '1px solid #ddd',
+  backgroundColor: 'white',
+  cursor: 'pointer',
+  outline: 'none',
+};
+const fabStyle = {
+  position: 'fixed',
+  bottom: '40px',
+  right: '40px',
+  width: '60px',
+  height: '60px',
+  borderRadius: '50%',
+  backgroundColor: '#001f3f',
+  border: 'none',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
+  cursor: 'pointer',
+  zIndex: 999, // Di bawah Navbar dan Modal
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  transition: 'transform 0.2s',
+  outline: 'none',
+};
+// Plus Icon CSS Components
+const plusIconContainer = {
+  position: 'relative',
+  width: '24px',
+  height: '24px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+};
+
+const horizontalLine = {
+  position: 'absolute',
+  width: '24px',
+  height: '4px',
+  backgroundColor: 'white',
+  borderRadius: '2px',
+};
+
+const verticalLine = {
+  position: 'absolute',
+  width: '4px',
+  height: '24px',
+  backgroundColor: 'white',
+  borderRadius: '2px',
+};
+
+// Modal Styles
+const modalOverlayStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.6)', // HITAM TRANSPARAN (Netral)
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 10001, // Tetap di atas Navbar
+  padding: '20px',
+  backdropFilter: 'blur(4px)', // Efek blur halus di belakangnya
+};
+const modalContentStyle = {
+  backgroundColor: 'white',
+  padding: '30px',
+  borderRadius: '16px',
+  width: '100%',
+  maxWidth: '550px',
+  boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+};
+
+const closeBtnStyle = {
+  background: 'none',
+  border: 'none',
+  color: '#001f3f', // Navy
+  cursor: 'pointer',
+  fontSize: '24px',
+  fontWeight: 'bold',
+  transition: '0.2s',
+  padding: '5px',
+};
+
+const inputGroup = {
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const inputStyle = {
+  padding: '12px 16px',
+  borderRadius: '10px',
+  border: '1px solid #eee',
+  backgroundColor: '#f9f9f9',
+  fontSize: '16px',
+  outline: 'none',
+  transition: 'border-color 0.2s',
+};
+
+const submitBtnStyle = {
+  padding: '14px',
+  backgroundColor: '#001f3f', // Navy
+  color: 'white',
+  border: 'none',
+  borderRadius: '10px',
+  cursor: 'pointer',
+  fontWeight: 'bold',
+  fontSize: '16px',
+  marginTop: '10px',
+  transition: 'background-color 0.2s',
+};
+
 export default function HomePage() {
   const dispatch = useDispatch();
 
@@ -135,120 +252,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-// --- STYLING OBJECTS ---
-
-const selectStyle = {
-  padding: '8px 12px',
-  borderRadius: '8px',
-  border: '1px solid #ddd',
-  backgroundColor: 'white',
-  cursor: 'pointer',
-  outline: 'none',
-};
-const fabStyle = {
-  position: 'fixed',
-  bottom: '40px',
-  right: '40px',
-  width: '60px',
-  height: '60px',
-  borderRadius: '50%',
-  backgroundColor: '#001f3f',
-  border: 'none',
-  boxShadow: '0 4px 12px rgba(0,0,0,0.4)',
-  cursor: 'pointer',
-  zIndex: 999, // Di bawah Navbar dan Modal
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  transition: 'transform 0.2s',
-  outline: 'none',
-};
-// Plus Icon CSS Components
-const plusIconContainer = {
-  position: 'relative',
-  width: '24px',
-  height: '24px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-
-const horizontalLine = {
-  position: 'absolute',
-  width: '24px',
-  height: '4px',
-  backgroundColor: 'white',
-  borderRadius: '2px',
-};
-
-const verticalLine = {
-  position: 'absolute',
-  width: '4px',
-  height: '24px',
-  backgroundColor: 'white',
-  borderRadius: '2px',
-};
-
-// Modal Styles
-const modalOverlayStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: 'rgba(0, 0, 0, 0.6)', // HITAM TRANSPARAN (Netral)
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 10001, // Tetap di atas Navbar
-  padding: '20px',
-  backdropFilter: 'blur(4px)', // Efek blur halus di belakangnya
-};
-const modalContentStyle = {
-  backgroundColor: 'white',
-  padding: '30px',
-  borderRadius: '16px',
-  width: '100%',
-  maxWidth: '550px',
-  boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-};
-
-const closeBtnStyle = {
-  background: 'none',
-  border: 'none',
-  color: '#001f3f', // Navy
-  cursor: 'pointer',
-  fontSize: '24px',
-  fontWeight: 'bold',
-  transition: '0.2s',
-  padding: '5px',
-};
-
-const inputGroup = {
-  display: 'flex',
-  flexDirection: 'column',
-};
-
-const inputStyle = {
-  padding: '12px 16px',
-  borderRadius: '10px',
-  border: '1px solid #eee',
-  backgroundColor: '#f9f9f9',
-  fontSize: '16px',
-  outline: 'none',
-  transition: 'border-color 0.2s',
-};
-
-const submitBtnStyle = {
-  padding: '14px',
-  backgroundColor: '#001f3f', // Navy
-  color: 'white',
-  border: 'none',
-  borderRadius: '10px',
-  cursor: 'pointer',
-  fontWeight: 'bold',
-  fontSize: '16px',
-  marginTop: '10px',
-  transition: 'background-color 0.2s',
-};

@@ -32,20 +32,28 @@ export default function DetailPage() {
 
   return (
     <div style={{ maxWidth: '750px', margin: '0 auto', padding: '0 20px 50px' }}>
-      
+
       {/* AREA THREAD UTAMA */}
-      <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '12px', border: '1px solid #eee', marginTop: '20px' }}>
-        
-        <header style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+      <div style={{
+        backgroundColor: 'white', padding: '20px', borderRadius: '12px', border: '1px solid #eee', marginTop: '20px',
+      }}>
+
+        <header style={{
+          display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px',
+        }}>
           {thread.owner?.avatar && (
             <img
               src={thread.owner.avatar}
               alt={thread.owner.name}
-              style={{ width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid #001f3f', objectFit: 'cover' }}
+              style={{
+                width: '42px', height: '42px', borderRadius: '50%', border: '1.5px solid #001f3f', objectFit: 'cover',
+              }}
             />
           )}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <h1 style={{ margin: 0, fontSize: '18px', color: '#001f3f', lineHeight: '1.3' }}>{thread.title}</h1>
+            <h1 style={{
+              margin: 0, fontSize: '18px', color: '#001f3f', lineHeight: '1.3',
+            }}>{thread.title}</h1>
             <div style={{ fontSize: '12px', color: '#666' }}>
               <span>Oleh <strong>{thread.owner?.name}</strong></span>
               <span style={{ margin: '0 6px' }}>•</span>
@@ -56,27 +64,33 @@ export default function DetailPage() {
 
         {/* Kategori Badge - Dibuat lebih kecil & rapat */}
         <div style={{ marginBottom: '12px' }}>
-          <span style={{ backgroundColor: '#f0f2f5', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', color: '#001f3f', fontWeight: 'bold' }}>
+          <span style={{
+            backgroundColor: '#f0f2f5', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', color: '#001f3f', fontWeight: 'bold',
+          }}>
             #{thread.category}
           </span>
         </div>
 
         {/* BODY THREAD - Di sini kunci agar tag HTML/BR tidak muncul sebagai teks */}
-        <div 
-          style={{ 
-            lineHeight: '1.5', 
-            color: '#333', 
-            fontSize: '14.5px', 
-            borderTop: '1px solid #f9f9f9', 
-            paddingTop: '12px' 
+        <div
+          style={{
+            lineHeight: '1.5',
+            color: '#333',
+            fontSize: '14.5px',
+            borderTop: '1px solid #f9f9f9',
+            paddingTop: '12px',
           }}
-          dangerouslySetInnerHTML={{ __html: thread.body }} 
+          dangerouslySetInnerHTML={{ __html: thread.body }}
         />
       </div>
 
       {/* BOX INPUT KOMENTAR - Dibuat sangat rapat */}
-      <div style={{ marginTop: '15px', padding: '15px', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #eee' }}>
-        <h4 style={{ marginTop: 0, marginBottom: '8px', color: '#001f3f', fontSize: '14px' }}>Beri Komentar</h4>
+      <div style={{
+        marginTop: '15px', padding: '15px', backgroundColor: '#fff', borderRadius: '12px', border: '1px solid #eee',
+      }}>
+        <h4 style={{
+          marginTop: 0, marginBottom: '8px', color: '#001f3f', fontSize: '14px',
+        }}>Beri Komentar</h4>
         {authUser ? (
           <form onSubmit={onCommentSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <textarea
@@ -84,16 +98,29 @@ export default function DetailPage() {
               onChange={(e) => setContent(e.target.value)}
               placeholder="Tulis balasan kamu..."
               required
-              style={{ 
-                width: '100%', minHeight: '60px', padding: '10px', borderRadius: '8px', 
-                border: '1px solid #ddd', outline: 'none', fontSize: '13px', fontFamily: 'inherit'
+              style={{
+                width: '100%',
+                minHeight: '60px',
+                padding: '10px',
+                borderRadius: '8px',
+                border: '1px solid #ddd',
+                outline: 'none',
+                fontSize: '13px',
+                fontFamily: 'inherit',
               }}
             />
-            <button 
-              type="submit" 
-              style={{ 
-                alignSelf: 'flex-end', padding: '6px 16px', backgroundColor: '#001f3f', 
-                color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', fontSize: '13px' 
+            <button
+              type="submit"
+              style={{
+                alignSelf: 'flex-end',
+                padding: '6px 16px',
+                backgroundColor: '#001f3f',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                fontSize: '13px',
               }}
             >
               Kirim
@@ -106,7 +133,9 @@ export default function DetailPage() {
 
       {/* DAFTAR KOMENTAR */}
       <div style={{ marginTop: '20px' }}>
-        <h4 style={{ color: '#001f3f', marginBottom: '10px', borderBottom: '1.5px solid #001f3f', display: 'inline-block', fontSize: '14px' }}>
+        <h4 style={{
+          color: '#001f3f', marginBottom: '10px', borderBottom: '1.5px solid #001f3f', display: 'inline-block', fontSize: '14px',
+        }}>
           Komentar ({thread.comments?.length || 0})
         </h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>

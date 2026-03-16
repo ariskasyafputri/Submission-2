@@ -3,84 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { asyncToggleVoteThread } from '../states/threadsSlice';
 
-export default function ThreadItem({ thread }) {
-  const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.auth?.user);
-  const [isTitleHovered, setIsTitleHovered] = useState(false);
-
-  const isUpVoted = authUser ? thread.upVotesBy.includes(authUser.id) : false;
-
-  // FUNGSI PEMBERSIH HTML: Menghapus tag agar tidak muncul teks <div> di HomePage
-  const stripHtml = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    return doc.body.textContent || "";
-  };
-
-  const handleVote = () => {
-    if (!authUser) {
-      alert('Login dulu boss, baru bisa vote');
-      return;
-    }
-    dispatch(asyncToggleVoteThread({ threadId: thread.id, type: 'up' }));
-  };
-
-  // Bersihkan teks body sebelum ditampilkan sebagai cuplikan
-  const cleanBody = stripHtml(thread.body);
-
-  return (
-    <div style={cardStyle}>
-      <Link
-        to={`/threads/${thread.id}`}
-        style={{
-          textDecoration: isTitleHovered ? 'underline' : 'none',
-          color: '#001f3f',
-        }}
-        onMouseEnter={() => setIsTitleHovered(true)}
-        onMouseLeave={() => setIsTitleHovered(false)}
-      >
-        <h3 style={titleStyle}>{thread.title}</h3>
-      </Link>
-
-      {/* Tampilkan cuplikan teks yang sudah BERSIH dari tag HTML */}
-      <p style={bodyStyle}>
-        {cleanBody.length > 150 ? `${cleanBody.slice(0, 150)}...` : cleanBody}
-      </p>
-
-      <div style={metaStyle}>
-        <img
-          src={thread.owner?.avatar}
-          alt={thread.owner?.name}
-          style={avatarStyle}
-        />
-        <span style={{ fontWeight: '500' }}>{thread.owner?.name}</span>
-        <span>•</span>
-        <span>{new Date(thread.createdAt).toLocaleDateString('id-ID')}</span>
-        <span>•</span>
-        <span style={categoryBadgeStyle}>#{thread.category}</span>
-      </div>
-
-      <div style={footerStyle}>
-        <button
-          type="button"
-          onClick={handleVote}
-          style={{
-            ...voteButtonStyle,
-            backgroundColor: isUpVoted ? '#2ea44f' : 'white',
-            color: isUpVoted ? 'white' : '#555',
-            borderColor: isUpVoted ? '#2ea44f' : '#ddd',
-          }}
-        >
-          👍 {thread.upVotesBy.length}
-        </button>
-
-        <span style={commentInfoStyle}>
-          💬 {thread.totalComments} <span style={{ color: '#888' }}>Komentar</span>
-        </span>
-      </div>
-    </div>
-  );
-}
-
 // --- STYLING OBJECTS (Tetap Sama) ---
 const cardStyle = {
   border: '1px solid #eee',
@@ -162,3 +84,81 @@ const commentInfoStyle = {
   alignItems: 'center',
   gap: '5px',
 };
+
+export default function ThreadItem({ thread }) {
+  const dispatch = useDispatch();
+  const authUser = useSelector((state) => state.auth?.user);
+  const [isTitleHovered, setIsTitleHovered] = useState(false);
+
+  const isUpVoted = authUser ? thread.upVotesBy.includes(authUser.id) : false;
+
+  // FUNGSI PEMBERSIH HTML: Menghapus tag agar tidak muncul teks <div> di HomePage
+  const stripHtml = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
+  };
+
+  const handleVote = () => {
+    if (!authUser) {
+      alert('Login dulu boss, baru bisa vote');
+      return;
+    }
+    dispatch(asyncToggleVoteThread({ threadId: thread.id, type: 'up' }));
+  };
+
+  // Bersihkan teks body sebelum ditampilkan sebagai cuplikan
+  const cleanBody = stripHtml(thread.body);
+
+  return (
+    <div style={cardStyle}>
+      <Link
+        to={`/threads/${thread.id}`}
+        style={{
+          textDecoration: isTitleHovered ? 'underline' : 'none',
+          color: '#001f3f',
+        }}
+        onMouseEnter={() => setIsTitleHovered(true)}
+        onMouseLeave={() => setIsTitleHovered(false)}
+      >
+        <h3 style={titleStyle}>{thread.title}</h3>
+      </Link>
+
+      {/* Tampilkan cuplikan teks yang sudah BERSIH dari tag HTML */}
+      <p style={bodyStyle}>
+        {cleanBody.length > 150 ? `${cleanBody.slice(0, 150)}...` : cleanBody}
+      </p>
+
+      <div style={metaStyle}>
+        <img
+          src={thread.owner?.avatar}
+          alt={thread.owner?.name}
+          style={avatarStyle}
+        />
+        <span style={{ fontWeight: '500' }}>{thread.owner?.name}</span>
+        <span>•</span>
+        <span>{new Date(thread.createdAt).toLocaleDateString('id-ID')}</span>
+        <span>•</span>
+        <span style={categoryBadgeStyle}>#{thread.category}</span>
+      </div>
+
+      <div style={footerStyle}>
+        <button
+          type="button"
+          onClick={handleVote}
+          style={{
+            ...voteButtonStyle,
+            backgroundColor: isUpVoted ? '#2ea44f' : 'white',
+            color: isUpVoted ? 'white' : '#555',
+            borderColor: isUpVoted ? '#2ea44f' : '#ddd',
+          }}
+        >
+          👍 {thread.upVotesBy.length}
+        </button>
+
+        <span style={commentInfoStyle}>
+          💬 {thread.totalComments} <span style={{ color: '#888' }}>Komentar</span>
+        </span>
+      </div>
+    </div>
+  );
+}

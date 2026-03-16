@@ -54,14 +54,19 @@
       "error",
       {
         "devDependencies": [
-          "vite.config.js",
-          "eslint.config.js",
-          "cypress.config.js",
-          "jest.setup.js",
-          "**/*.test.js",
-          "**/*.spec.js",
-          "**/*.cy.js"
-        ]
+        "vite.config.js",
+        "eslint.config.js",
+        "cypress.config.js",
+        "jest.setup.js",
+        "**/*.test.js",
+        "**/*.test.jsx",
+        "**/*.spec.js",
+        "**/*.spec.jsx",
+        "**/*.cy.js",
+        "**/*.cy.jsx",
+        "**/tests/**"
+]
+
       }
     ]
   }

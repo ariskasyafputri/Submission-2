@@ -3,65 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { asyncUnsetAuthUser } from '../states/authSlice';
 
-export default function Navbar() {
-  const authUser = useSelector((state) => state.auth?.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const onLogout = () => {
-    dispatch(asyncUnsetAuthUser());
-    navigate('/login');
-  };
-
-  const getLinkStyle = (path) => ({
-    color: location.pathname === path ? '#ffffff' : '#b0c4de',
-    textDecoration: 'none',
-    fontSize: '14px', // Sedikit lebih besar
-    fontWeight: location.pathname === path ? '600' : '400',
-    padding: '8px 12px',
-    borderRadius: '6px',
-    backgroundColor: location.pathname === path ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-    transition: 'all 0.2s ease',
-  });
-
-  return (
-    <header style={headerWrapper}>
-      <nav style={navInnerStyle}>
-
-        {/* GRUP KIRI: Navigasi Utama */}
-        <div style={leftSectionStyle}>
-          <Link to="/" style={getLinkStyle('/')}>Home</Link>
-          <Link to="/leaderboard" style={getLinkStyle('/leaderboard')}>
-            🏆 Leaderboard
-          </Link>
-        </div>
-
-        {/* GRUP KANAN: User Profile & Auth */}
-        <div style={rightSectionStyle}>
-          {authUser ? (
-            <div style={profileGroup}>
-              <div style={userInfoStyle}>
-                <img src={authUser.avatar} alt="" style={avatarStyle} />
-                <span style={userNameStyle}>{authUser.name}</span>
-              </div>
-              <button onClick={onLogout} style={logoutButtonStyle}>
-                Logout
-              </button>
-            </div>
-          ) : (
-            <div style={authButtonGroup}>
-              <Link to="/register" style={registerLinkStyle}>Register</Link>
-              <Link to="/login" style={loginButtonStyle}>Login</Link>
-            </div>
-          )}
-        </div>
-
-      </nav>
-    </header>
-  );
-}
-
 // --- STYLING MODERN (HEIGHT 56PX) ---
 
 const headerWrapper = {
@@ -162,3 +103,62 @@ const loginButtonStyle = {
   fontWeight: 'bold',
   transition: 'transform 0.1s active',
 };
+
+export default function Navbar() {
+  const authUser = useSelector((state) => state.auth?.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const onLogout = () => {
+    dispatch(asyncUnsetAuthUser());
+    navigate('/login');
+  };
+
+  const getLinkStyle = (path) => ({
+    color: location.pathname === path ? '#ffffff' : '#b0c4de',
+    textDecoration: 'none',
+    fontSize: '14px', // Sedikit lebih besar
+    fontWeight: location.pathname === path ? '600' : '400',
+    padding: '8px 12px',
+    borderRadius: '6px',
+    backgroundColor: location.pathname === path ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+    transition: 'all 0.2s ease',
+  });
+
+  return (
+    <header style={headerWrapper}>
+      <nav style={navInnerStyle}>
+
+        {/* GRUP KIRI: Navigasi Utama */}
+        <div style={leftSectionStyle}>
+          <Link to="/" style={getLinkStyle('/')}>Home</Link>
+          <Link to="/leaderboard" style={getLinkStyle('/leaderboard')}>
+            🏆 Leaderboard
+          </Link>
+        </div>
+
+        {/* GRUP KANAN: User Profile & Auth */}
+        <div style={rightSectionStyle}>
+          {authUser ? (
+            <div style={profileGroup}>
+              <div style={userInfoStyle}>
+                <img src={authUser.avatar} alt="" style={avatarStyle} />
+                <span style={userNameStyle}>{authUser.name}</span>
+              </div>
+              <button onClick={onLogout} style={logoutButtonStyle}>
+                Logout
+              </button>
+            </div>
+          ) : (
+            <div style={authButtonGroup}>
+              <Link to="/register" style={registerLinkStyle}>Register</Link>
+              <Link to="/login" style={loginButtonStyle}>Login</Link>
+            </div>
+          )}
+        </div>
+
+      </nav>
+    </header>
+  );
+}

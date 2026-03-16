@@ -8,8 +8,8 @@ export default {
 export const Default = () => (
   <CommentItem
     comment={{
-      content: 'This is comment example',
-      owner: { name: 'Farhan' },
+      content: 'Ini contoh komen yang akan muncul',
+      owner: { name: 'Ariska' },
       createdAt: new Date().toISOString(),
     }}
   />

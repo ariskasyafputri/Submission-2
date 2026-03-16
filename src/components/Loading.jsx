@@ -1,21 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-export default function Loading() {
-  const isLoading = useSelector((state) => state.loading);
-
-  if (!isLoading) return null;
-
-  return (
-    <div style={loadingContainerStyle}>
-      <div style={loadingBadgeStyle}>
-        <div className="spinner-mini"></div>
-        <span>Memuat...</span>
-      </div>
-    </div>
-  );
-}
-
 // --- STYLING (FLOATING UNDER NAVBAR) ---
 
 const loadingContainerStyle = {
@@ -42,3 +27,18 @@ const loadingBadgeStyle = {
   gap: '8px',
   border: '1px solid rgba(0, 31, 63, 0.1)', // Border navy tipis
 };
+
+export default function Loading() {
+  const isLoading = useSelector((state) => state.loading);
+
+  if (!isLoading) return null;
+
+  return (
+    <div style={loadingContainerStyle}>
+      <div style={loadingBadgeStyle}>
+        <div className="spinner-mini"></div>
+        <span>Memuat...</span>
+      </div>
+    </div>
+  );
+}
